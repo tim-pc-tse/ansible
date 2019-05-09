@@ -1,0 +1,35 @@
+---
+- name: apache services
+  hosts: web
+  become: no
+  tasks:
+  - block:
+    - name: latest httpd version installed
+      yum:
+        name: httpd
+        state: latest
+  - block:
+    - name: firewall permits http services
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: yes
+  - block:
+    - name: httpd enabled and running
+      service:
+        name: httpd
+        enabled: true
+        state: started
+  - block:
+    - name: test html page
+      copy:
+        content: "Welcome to the example.com intranet!\n"
+        dest: /var/www/html/index.html
+- name: test
+  hosts: localhost
+  tasks:
+  - name: connect to intranet
+    uri:
+      url: http://10.24.130.132
+      status_code: 200
