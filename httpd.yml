@@ -24,7 +24,7 @@
   - block:
     - name: test html page
       copy:
-        content: "Welcome to the example.com intranet!\n"
+        content: "Welcome to Ansible Tower Workshop!\n"
         dest: /var/www/html/index.html
 - name: test
   hosts: localhost
