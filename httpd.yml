@@ -22,7 +22,12 @@
         enabled: true
         state: started
   - block:
-    - name: test html page
+    - name: set html page
       copy:
         content: "Welcome to Ansible Tower Workshop!\n"
         dest: /var/www/html/index.html
+  - block:
+    - name: verify web service
+      uri:
+        url: http://{{ inventory_hostname }}
+        status_code: 200
