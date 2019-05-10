@@ -26,10 +26,3 @@
       copy:
         content: "Welcome to Ansible Tower Workshop!\n"
         dest: /var/www/html/index.html
-- name: test
-  hosts: localhost
-  tasks:
-  - name: connect to intranet
-    uri:
-      url: http://10.24.130.132
-      status_code: 200
